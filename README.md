@@ -11,7 +11,7 @@ source ~/etc/bashrc
 ### 2. Install the solver
 
 1) enter the correct path ```cd BioFOAM/solver/```
-2) rum  ```wmake```
+2) run  ```wmake```
 3) if you want to clear the solver, run ```wclean```
 
 ### Please note that the solver requires debugging process when it is first installed in a new environment.
