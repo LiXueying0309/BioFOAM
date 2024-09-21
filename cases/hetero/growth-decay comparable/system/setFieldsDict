@@ -1,0 +1,95 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration    | Version:  7                                     |
+|   \\  /    A nd          | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      setFieldsDict;
+}
+
+// The field to set
+fields
+(
+    //eps
+    MbbyMmax
+    CbyC0
+);
+
+// Method of setting the field
+setFormat raw;
+
+// Set the STL file as the region to apply the field
+regions
+(   
+    boxToCell
+    {
+        box (-1.75 -0.625 0) (1.75 0.625 0.01);
+        fieldValues
+        (
+           volScalarFieldValue CbyC0 0.6
+           volScalarFieldValue MbbyMmax 0
+           volScalarFieldValue eps 1
+        );
+    }
+   
+    surfaceToCell
+    {
+        file "constant/triSurface/hetero_cut.stl";
+        outsidePoints // definition of outside
+        (
+            (-0.6 -0.33 0.005)
+        ); 
+        includeCut true; // cells cut by surface
+        includeInside yes; // cells not on outside of surf
+        includeOutside no; // cells on outside of surf
+        nearDistance -1; // cells with centre near surf
+        curvature 0.9; // cells within nearDistance
+        fieldValues
+        (
+            volScalarFieldValue CbyC0 0.0001
+			//volScalarFieldValue MbbyMmax 0
+			volScalarFieldValue eps 0.0001
+        );
+    }
+/*   
+    surfaceToCell
+    {
+        file "constant/triSurface/biofilm.stl";
+        outsidePoints // definition of outside
+        (
+            (-0.6 -0.33 0.005)
+        ); 
+        includeCut true; // cells cut by surface
+        includeInside yes; // cells not on outside of surf
+        includeOutside no; // cells on outside of surf
+        nearDistance -1; // cells with centre near surf
+        curvature 0.9; // cells within nearDistance
+        fieldValues
+        (
+            //volScalarFieldValue CbyC0 0.6
+            volScalarFieldValue MbbyMmax 0
+            //volScalarFieldValue eps 0.0001
+        );
+    }
+*/
+);
+
+// Default value for points not inside the set region
+defaultValue uniform (0 0 0);
+
+// Method of interpolating values for points not inside the set region
+interpolationScheme cell;
+
+// Write output to time directories
+writeControl timeStep;
+
+
+
+// ************************************************************************* //
