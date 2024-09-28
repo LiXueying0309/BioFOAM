@@ -17,6 +17,5 @@ forAll(Drag,celli)
 {
 	if (Solid[celli] == 0)
 		{Drag[celli]= 0;}
-}
 
-//volScalarField Db("Db",a*pow(Mb*ops/(Mmax-Mb),4.0));
+}

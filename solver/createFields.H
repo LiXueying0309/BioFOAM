@@ -87,25 +87,7 @@ dimensionedScalar C0
     (
         transportProperties.lookup("C0")
     );
-/*
-dimensionedScalar a
-    (
-        transportProperties.lookup("a")
-    );
 
-dimensionedScalar b
-    (
-        transportProperties.lookup("b")
-    );
-dimensionedScalar c
-    (
-        transportProperties.lookup("c")
-    );
-dimensionedScalar d
-    (
-        transportProperties.lookup("d")
-    );
-*/
 dimensionedScalar rhoMb
     (
         transportProperties.lookup("rhoMb")

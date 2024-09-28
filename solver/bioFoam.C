@@ -44,14 +44,9 @@ Description
 #include "localEulerDdtScheme.H"
 #include "CrankNicolsonDdtScheme.H"
 #include "subCycle.H"
-//#include "porousImmiscibleIncompressibleTwoPhaseMixture.H"
-//#include "pimpleControl.H"
 #include "localEulerDdtScheme.H"
 #include "fvcSmooth.H"
 #include "pisoControl.H"
-//#include "turbulentTransportModel.H"
-//#include "capillarityModel.H"
-//#include "relativePermeabilityModel.H"
 #include "singlePhaseTransportModel.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -96,12 +91,11 @@ int main(int argc, char *argv[])
             }
              #include "CEqn.H"
              #include "MEqn.H"
-//#include "epsEqn.H"
+
 
              mt=fvc::ddt(MbbyMmax);
 			 fvc::ddt(eps) = -(1./rhoMb)*mt*eps.oldTime(); 
-             //  epss =epss-a*(rhof/rhos)*epss.oldTime()*beta*Madot*mesh.time().deltaTValue(); 
-// #include "epsEqn.H"
+             
                  #include "updateVariables.H"
         }
 
