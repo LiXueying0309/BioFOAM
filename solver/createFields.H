@@ -87,6 +87,25 @@ dimensionedScalar C0
     (
         transportProperties.lookup("C0")
     );
+/*
+dimensionedScalar a
+    (
+        transportProperties.lookup("a")
+    );
+
+dimensionedScalar b
+    (
+        transportProperties.lookup("b")
+    );
+dimensionedScalar c
+    (
+        transportProperties.lookup("c")
+    );
+dimensionedScalar d
+    (
+        transportProperties.lookup("d")
+    );
+*/
 dimensionedScalar rhoMb
     (
         transportProperties.lookup("rhoMb")
@@ -119,6 +138,23 @@ volVectorField GradP
     fvc::grad(p)
 );
 
+
+//p = p*rhof;
+
+/*
+Info<< "Reading field Mb\n" << endl;
+volScalarField Mb
+(
+    IOobject
+    (
+        "Mb",
+        runTime.timeName(),
+        mesh,
+        IOobject::MUST_READ,
+        IOobject::AUTO_WRITE
+    ),
+    mesh
+);*/
 Info<< "Reading field MbbyMmax\n" << endl;
 volScalarField MbbyMmax
 (
@@ -204,6 +240,34 @@ volScalarField Solid
 
 #include "createPhi.H"
 
+/*
+volScalarField rhof
+(
+    IOobject
+    (
+        "rhof",
+        runTime.timeName(),
+        mesh,
+        IOobject::MUST_READ,
+        IOobject::AUTO_WRITE
+    ),
+    mesh
+);
+
+volScalarField rhos
+(
+    IOobject
+    (
+        "rhos",
+        runTime.timeName(),
+        mesh,
+        IOobject::MUST_READ,
+        IOobject::AUTO_WRITE
+    ),
+    mesh
+);
+*/
+
 // Defining Mass Flux
 surfaceScalarField rhofPhi
 (
@@ -257,6 +321,12 @@ if (p.needReference())
 }
 
 mesh.setFluxRequired(p.name());
+//mesh.setFluxRequired(alpha1.name());
+
+// MULES flux from previous time-step
+
+
+// MULES Correction
 tmp<surfaceScalarField> talphaPhiCorr0;
 
 #include "createPorousMediaFields.H"
