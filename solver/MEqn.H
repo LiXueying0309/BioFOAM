@@ -33,7 +33,7 @@ fvScalarMatrix MEqn
     ==
     eps*fvm::laplacian(Db, MbbyMmax)
     + fvm::div(phi, MbbyMmax)
-    + eps*(mum/Yxs + ms)*Yxs*CbyC0*MbbyMmax/(ks/C0 + CbyC0)
+    + eps*(mum/Yxs + ms)*Yxs*CbyC0*M/(ks/C0 + CbyC0)
     - eps*Yxs*ms*MbbyMmax
     + eps*conditionalAttachmentRate
     - eps*detachmentRate
@@ -41,25 +41,27 @@ fvScalarMatrix MEqn
 
 MEqn.solve();
 
-//#include "epsEqn.H"
-
     forAll(Solid,celli) 
     {
       if(Solid[celli]==1) 
       
-                { //MbbyMmax[celli] = 1; 
-                MbbyMmax[celli] =0;}
+        { 
+            MbbyMmax[celli] =0;
+		}
     }
   
-   forAll(MbbyMmax,celli) 
+    forAll(M,celli) 
     {
-      if(MbbyMmax[celli]>0.3) 
+      if(M[celli]>0.3) 
+        { 
+			MbbyMmax[celli] = 0.3; 
+            eps[celli] =0.0001;
+		}
+      if(M[celli]<-0.0001) 
       
-                { MbbyMmax[celli] = 0.3; 
-                eps[celli] =0.0001;}
-      if(MbbyMmax[celli]<-0.0001) 
-      
-                { MbbyMmax[celli] = 0; 
-                eps[celli] =1;}
-    }
+        { 
+			MbbyMmax[celli] = 0; 
+            eps[celli] =1;
+		}
+	}
 }

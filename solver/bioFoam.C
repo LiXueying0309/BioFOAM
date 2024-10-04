@@ -78,28 +78,20 @@ int main(int argc, char *argv[])
         // --- Pressure-velocity PIMPLE corrector loop
        
         {
-	  //  #include "updateVariables.H"
-           
-            
-            #include "UEqn.H"
+			#include "UEqn.H"
        	    
-             //--- Pressure corrector loop
+            //--- Pressure corrector loop
             while (piso.correct())
             {
-                #include "pEqn.H"
-               
+                #include "pEqn.H"  
             }
-             #include "CEqn.H"
-             #include "MEqn.H"
+            #include "CEqn.H"
+            #include "MEqn.H"
 
-
-             mt=fvc::ddt(MbbyMmax);
-			 fvc::ddt(eps) = -(1./rhoMb)*mt*eps.oldTime(); 
-             
-                 #include "updateVariables.H"
+			mt=fvc::ddt(MbbyMmax);
+			fvc::ddt(eps) = -(1./rhoMb)*mt*eps.oldTime(); 
+            #include "updateVariables.H"
         }
-
-        
 
         runTime.write();
 
