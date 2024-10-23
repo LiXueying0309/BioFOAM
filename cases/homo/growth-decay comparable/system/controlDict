@@ -29,7 +29,7 @@ deltaT          10;
 
 writeControl    runTime;
 
-writeInterval   5000;
+writeInterval   100;
 
 purgeWrite      0;
 

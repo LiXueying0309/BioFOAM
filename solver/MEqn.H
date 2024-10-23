@@ -21,7 +21,7 @@ volScalarField conditionalAttachmentRate
 
         forAll(mesh.C(), celli) // Loop over all cells
         {
-            if (mesh.C()[celli].x() < 1.25 && mesh.C()[celli].x() > -1.25) // Check x-coordinate of cell center, convert mm to meters
+            if (mesh.C()[celli].x() < 1.25 && mesh.C()[celli].x() > -1.25) // 1.25 is set to limit the spatial distribution of biofilm, which could be adjusted according to the pore geometry
             {
                 conditionalAttachmentRate[celli] = attachmentRate[celli];
             }

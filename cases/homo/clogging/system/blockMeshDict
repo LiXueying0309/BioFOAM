@@ -15,15 +15,15 @@ FoamFile
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-convertToMeters 0.001;
+convertToMeters 1;
 
-lx0 -1000;
-ly0 0;
+lx0 -0.25;
+ly0 0.012;
 lz0 0;
 
-lx1 3000;
-ly1 1600;
-lz1 10;
+lx1 2.75;
+ly1 1.225;
+lz1 0.001;
 
 vertices
 (
@@ -40,7 +40,7 @@ vertices
 
 blocks
 (
-    hex (0 1 2 3 4 5 6 7) (1200 480 1) simpleGrading (1 1 1)
+    hex (0 1 2 3 4 5 6 7) (1200 500 1) simpleGrading (1 1 1)
 );
 
 edges

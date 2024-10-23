@@ -17,7 +17,7 @@ FoamFile
 // The field to set
 fields
 (
-    //eps
+    eps
     MbbyMmax
     CbyC0
 );
@@ -30,7 +30,7 @@ regions
 (   
     boxToCell
     {
-        box (-1000 0 0) (3000 1600 10);
+        box (-0.25 0.012 0) (2.75 1.225 0.001);
         fieldValues
         (
            volScalarFieldValue CbyC0 0.6
@@ -38,13 +38,13 @@ regions
            volScalarFieldValue eps 1
         );
     }
-   
+ 
     surfaceToCell
     {
-        file "constant/triSurface/homoGrains.stl";
+        file "constant/triSurface/homo_new.stl";
         outsidePoints // definition of outside
         (
-            (0.2 0.2 0.005)
+            (1.1 0.45 0.0005)
         ); 
         includeCut true; // cells cut by surface
         includeInside yes; // cells not on outside of surf
@@ -58,27 +58,7 @@ regions
 			volScalarFieldValue eps 0.0001
         );
     }
-/*    
-    surfaceToCell
-    {
-        file "constant/triSurface/bio_homo.stl";
-        outsidePoints // definition of outside
-        (
-            (0.2 0.2 0.005)
-        ); 
-        includeCut true; // cells cut by surface
-        includeInside yes; // cells not on outside of surf
-        includeOutside no; // cells on outside of surf
-        nearDistance -1; // cells with centre near surf
-        curvature 0.9; // cells within nearDistance
-        fieldValues
-        (
-            //volScalarFieldValue CbyC0 0.6
-            volScalarFieldValue MbbyMmax 0.3
-            //volScalarFieldValue eps 0.0001
-        );
-    }
-*/
+
 );
 
 // Default value for points not inside the set region
